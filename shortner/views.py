@@ -57,7 +57,7 @@ class UrlListCreateView(ShorturlMixin):
         )
         url =reverse('url_redirect', kwargs={'slug': object.short_key})
         # make sure to run the server on port 8000
-        full_url =  "http://127.0.0.1:8001" + url
+        full_url =  "http://127.0.0.1:8000" + url
         img  = qrcode.make(full_url, image_factory=qrcode.image.svg.SvgImage)
         with open('qr.svg', 'wb') as qr:
             img.save(qr)
