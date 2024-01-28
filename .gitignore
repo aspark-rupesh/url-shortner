@@ -5,6 +5,7 @@ __pycache__/
 # C extensions
 *.so
 
+readme.txt
 # Distribution / packaging
 .Python
 .DS_Store
