@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{%block title%} Home {%endblock%}
+{%block content%}
+
+<div class="container">
+
+	<form method="POST">
+		{% csrf_token %}
+		<div class="mb-3">
+		  <label for="exampleInputEmail1" class="form-label">Enter Url</label>
+		  <input type="text" class="form-control" id="exampleInputEmail1" name="input-url" aria-describedby="emailHelp">
+		</div>
+
+		<div class="mb-3">
+			
+			<label for="custom_key" class="form-label">Enter Custom Key</label>
+			<input type="text" class="form-control" id="custom_key" name="custom-key" aria-describedby="emailHelp">
+		  </div>
+		  {% if errors %}
+			<p class="text-danger">{{errors.custom_key}}</p>
+			{% endif %}
+
+		
+		<button type="submit" class="btn btn-primary">Make this url short!</button>
+	  </form>
+
+	  <table class="table">
+		<thead>
+		  <tr>
+			<th scope="col">SN</th>
+			<th scope="col">Short Url</th>
+			<th scope="col">Created At</th>
+			<th scope="col">Qr Code</th>
+			<th scope="col">Hit Count</th>
+		  </tr>
+		</thead>
+		<tbody>
+			{% for object in objects %}
+		  <tr>
+			<th scope="row">{{forloop.counter}}</th>
+			<td>
+				<a onClick="updateHitCount('{{ object.id }}')"class="short-link" href="{% url 'url_redirect' object.short_key %}" target="blank">
+				{{object.short_key}}
+				</a>
+			</td>
+		<td>{{object.created_at}}</td>
+		<td>
+			{% if object.qr_code %}
+			<a href="{{object.qr_code.url}}">View File</a>
+			{% endif %}
+		</td>
+		<td id="hitCount_{{ object.id }}">{{object.hit_count}}</td>
+			
+		  </tr>
+		  {% endfor %}
+		 
+		</tbody>
+	  </table>
+
+
+	
+
+</div>
+
+<script>
+	function updateHitCount(id) {
+
+		var current_value = $('#hitCount_' + id).html()
+		console.log("cyureee")
+		console.log(current_value)
+		$('#hitCount_' + id).html(parseInt(current_value)+1)
+       
+    }
+
+</script>
+
+  
+
+{%endblock%}

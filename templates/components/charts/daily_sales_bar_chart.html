@@ -1,0 +1,61 @@
+<!-- HTML template -->
+
+<canvas id="dailySales" style="height: 400px; width: 100%;" class="mixed-widget-7-chart card-rounded-bottom"></canvas>
+
+
+<!-- JavaScript code -->
+
+<script>
+    var dailySalesData = {{ daily_orders|safe }};
+    var dailySalesContext = document.getElementById('dailySales').getContext('2d');
+
+
+
+  var chart = new Chart(dailySalesContext, {
+  type: 'bar',
+  data: {
+    labels: Object.keys(dailySalesData),
+    datasets: [{
+      label: 'Daily Sales',
+      data: Object.values(dailySalesData),
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+
+          callback: function(value, index, values) {
+            return  value;
+          }
+        }
+      }]
+    }
+  }
+});
+
+
+</script>

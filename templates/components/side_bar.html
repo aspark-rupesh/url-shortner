@@ -1,0 +1,87 @@
+<div class="aside-menu flex-column-fluid">
+    <!--begin::Aside Menu-->
+    <div class="hover-scroll-overlay-y my-2 py-5 py-lg-8" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="0">
+        <!--begin::Menu-->
+        <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
+        <div class="menu-item">
+            <div class="menu-content pb-2">
+                <span class="menu-section text-muted text-uppercase fs-8 ls-1">Dashboard</span>
+            </div>
+        </div>
+        {% comment %}
+        {%include 'components/menu_item.html' with path="dashboard" url='org:index' title='Dashboard' icon="bi bi-speedometer2" %}
+        {% endcomment %}
+        {%include 'components/menu_item.html' with path="organization" url='org:organization_detail' title='Organization' icon="bi bi-bank" %}
+        {%include 'components/menu_item.html' with path="staticpage" url='org:staticpage_list' title='Info Pages' icon="bi bi-info-circle" %}
+
+
+        {%include 'components/menu_title.html' with title="Business"%}
+
+        <div data-kt-menu-trigger="click" class="menu-item menu-accordion {%if "product" in request.path or "p-category" in request.path or "attributes" in request.path or "stockinbatch" in request.path or "offer" in request.path or "stockvariant" in request.path or "b-category" in request.path or "brand" in request.path or "p-variant" in request.path%} show{%endif%}">
+            <span class="menu-link">
+                <span class="menu-icon">
+                    <i class="bi bi-box fs-3"></i>
+                </span>
+                <span class="menu-title">Product</span>
+                <span class="menu-arrow"></span>
+            </span>
+            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                {%include 'components/menu_item.html' with path="b-category/" url='product:brandcategory_list' title='Brand Category' icon="bi bi-grid-3x2-gap" %}
+                {%include 'components/menu_item.html' with path="brand/" url='product:brand_list' title='Brand' icon="bi bi-bezier2" %}
+                {%include 'components/menu_item.html' with path="p-category/" url='product:category_list' title='Product Category' icon="bi bi-view-list" %}
+                {%include 'components/menu_item.html' with path="product/" url='product:product_list' title='Products' icon="bi bi-headset-vr" %}
+                {%include 'components/menu_item.html' with path="p-variants/" url='product:variant_list' title='Variants' icon="bi bi-diagram-3-fill" %}
+
+                {% comment %} {%include 'components/menu_item.html' with path="stockinbatch" url='product:stockinbatch_list' title='Batch' icon="bi bi-view-list" %} {% endcomment %}
+            </div>
+        </div>
+        <div data-kt-menu-trigger="click" class="menu-item menu-accordion {%if "province" in request.path or "district" in request.path or "city" in request.path or "standarddeliverycharge" in request.path or "productdeliverycharge" in request.path %} show{%endif%}">
+            <span class="menu-link">
+                <span class="menu-icon">
+                    <i class="bi bi-box fs-3"></i>
+                </span>
+                <span class="menu-title">Delivery</span>
+                <span class="menu-arrow"></span>
+            </span>
+            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                {%include 'components/menu_item.html' with path="province/" url='delivery:province_list' title='Province List' icon="bi bi-geo" %}
+                {%include 'components/menu_item.html' with path="district/" url='delivery:district_list' title='District List' icon="bi bi-geo" %}
+                {%include 'components/menu_item.html' with path="city/" url='delivery:city_list' title='City List' icon="bi bi-geo" %}
+                {%include 'components/menu_item.html' with path="standarddeliverycharge/" url='delivery:standarddeliverycharge_list' params='province=all' title='Standard Delivery Charge' icon="bi bi-coin" %}
+                {%include 'components/menu_item.html' with path="productdeliverycharge/" url='delivery:productdeliverycharge_list' title='Product Delivery Charge' icon="bi bi-coin" %}
+
+            </div>
+        </div>
+
+        <div data-kt-menu-trigger="click" class="menu-item menu-accordion {%if "order" in request.path or "return" in request.path  %} show{%endif%}">
+            <span class="menu-link">
+                <span class="menu-icon">
+                    <i class="bi bi-basket3 fs-3"></i>
+                </span>
+                <span class="menu-title">Order</span>
+                <span class="menu-arrow"></span>
+            </span>
+            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                {%include 'components/menu_item.html' with path="order/" url='order:order_list' title='Order List' icon="bi bi-bag-check" %}
+            </div>
+        </div>
+        {%include 'components/menu_title.html' with title="Marketing"%}
+        {%include 'components/menu_item.html' with path="promo" url='marketing:promo_list' title='Promo Codes' icon="bi bi-input-cursor" %}
+        {%include 'components/menu_item.html' with path="newsletter" url='marketing:newsletter_list' title='Newsletter' icon="bi bi-chat-left-text" %}
+        {%include 'components/menu_item.html' with path="banner" url='marketing:banner_list' title='Banners' icon="bi bi-card-image" %}
+        {%include 'components/menu_item.html' with path="hot_deals" url='marketing:hot_deal_list' title='Hot Deal' icon="bi bi-megaphone" %}
+        {% comment %} {%include 'components/menu_item.html' with path="ads" url='marketing:promo_banner_list' title='Ads' icon="bi bi-card-image" %} {% endcomment %}
+         {%include 'components/menu_item.html' with path="faq" url='org:faq_list' title='Frequently Asked Question' icon="bi bi-question-circle" %}
+        {%include 'components/menu_item.html' with path="contact-us" url='marketing:customer_inquiry_list' title='Contact-us Inquiries' icon="bi bi-question-circle" %}
+        {% comment %} {%include 'components/menu_item.html' with path="bl-category" url='blog:blogcategory_list' title='Blog Categories' icon="bi bi-list-ul" %}
+        {%include 'components/menu_item.html' with path="blog" url='blog:blog_list' title='Blogs' icon="bi bi-body-text" %} {% endcomment %}
+
+        {%include 'components/menu_title.html' with title="User Management"%}
+        {%include 'components/menu_item.html' with path="admin/" url='user:user_list' title='Admins' icon="bi bi-person-check" %}
+        {%include 'components/menu_item.html' with path="user/" url='user:customer_list' title='Users' icon="bi bi-people" %}
+        {%include 'components/menu_item.html' with path="groups/" url='user:group_list' title='Groups' icon="bi bi-file-person-fill" %}
+
+        </div>
+        <!--end::Menu-->
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<canvas  class="mixed-widget-7-chart card-rounded-bottom" id="monthlySales" style="height: 400px; width: 100%;"></canvas>
+<script>
+var salesData = {{ monthly_orders|safe }};
+var ctx = document.getElementById('monthlySales').getContext('2d');
+
+var chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: Object.keys(salesData),
+        datasets: [{
+            label: 'Monthly Sales',
+            data: Object.values(salesData),
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    display: false
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                },
+                gridLines: {
+                    display: false
+                }
+            }]
+        }
+    }
+});
+
+
+
+
+					</script>
