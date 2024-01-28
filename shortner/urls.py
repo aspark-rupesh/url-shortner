@@ -1,12 +1,12 @@
 from django.urls import  path
 
-from shortner.views import  IndexPage, UrlRedirectView
+from shortner.views import  UrlListCreateView, UrlRedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path("", IndexPage.as_view(), name="index"),
+    path("", UrlListCreateView.as_view(), name="index"),
     path("redict-page/<str:slug>/",UrlRedirectView.as_view(),name="url_redirect"),
 
 

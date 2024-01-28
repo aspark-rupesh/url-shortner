@@ -23,8 +23,9 @@ class ShorturlMixin(View):
     queryset = ShortUrl.objects.all()
     success_url = reverse_lazy("index")
 
-class IndexPage(ShorturlMixin):
+class UrlListCreateView(ShorturlMixin):
     def get(self,request,*args,**kwargs):
+        # to list all the created urls
         if request.user.is_authenticated:
             objects = ShortUrl.objects.filter(creator=request.user).order_by('-id')
             return render(request,'index.html',{'objects':objects})
@@ -33,6 +34,7 @@ class IndexPage(ShorturlMixin):
     
     
     def post(self,request,*args,**kwargs):
+        # to create short urls
         original_url = self.request.POST.get('input-url')
         custom_key = self.request.POST.get('custom-key')
         objects = ShortUrl.objects.filter(creator=request.user).order_by('-id')
@@ -54,6 +56,7 @@ class IndexPage(ShorturlMixin):
 
         )
         url =reverse('url_redirect', kwargs={'slug': object.short_key})
+        # make sure to run the server on port 8000
         full_url =  "http://127.0.0.1:8001" + url
         img  = qrcode.make(full_url, image_factory=qrcode.image.svg.SvgImage)
         with open('qr.svg', 'wb') as qr:
